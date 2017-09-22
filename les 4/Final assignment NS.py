@@ -1,5 +1,5 @@
 def standaardtarief(afstandKM):
-    if afstandKM > 50:
+    if afstandKM >= 50:
         return (afstandKM * 0.60 + 15)
     if afstandKM <= 0:
         return 0
@@ -11,18 +11,18 @@ inputweekendrit = str(input('is het weekend? ja/nee: '))
 inputafstandKM = int(input('afstand in KM: '))
 
 def ritprijs(leeftijd, weekendrit, afstandKM):
-    TempPrijs = standaardtarief(afstandKM)
+    TempPrijs = standaardtarief(afstandKM) * 0.70
     if inputweekendrit == 'nee':
         if inputleeftijd < 12 or inputleeftijd >= 65:
-            return ((TempPrijs) * 0.70)
-    else:
-        return standaardtarief(afstandKM)
-
-    if weekendrit == 'ja':
-        TempPrijs = standaardtarief(afstandKM)
-        if inputleeftijd < 12 or inputleeftijd >= 65:
-            return ((TempPrijs) * 0.65)
+            return TempPrijs
         else:
-            return ((TempPrijs) * 0.60)
+            return standaardtarief(afstandKM)
+    else:
+        Tempprijs = standaardtarief(afstandKM) * 0.65
+        tempprijs = standaardtarief(afstandKM) * 0.60
+        if inputleeftijd <= 12 or inputleeftijd >= 65:
+            return TempPrijs
+        else:
+            return tempprijs
 
 print('deze rit kost u €', ritprijs(inputleeftijd, inputweekendrit, inputafstandKM))
